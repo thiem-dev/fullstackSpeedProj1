@@ -8,12 +8,12 @@ let LOCAL_URL=`http://localhost:3000/api`;
 const getAllBtn = document.querySelector('#getAllBtn');
 
 getAllBtn.addEventListener('click', async (e) => {
-    const data = await getAllPersons(LOCAL_URL);
+    const data = await getAllPersons();
     console.log(data)
 })
 
 // route: api/person/
-async function getAllPersons(url){
+async function getAllPersons(){
     url = `${LOCAL_URL}/person`
 
     try{
@@ -35,7 +35,7 @@ async function getAllPersons(url){
 }
 
 async function getOnePerson(id){
-    const url = `LOCAL_URL/person/${id}`
+    const url = `${LOCAL_URL}/person/${id}`
     try{
         const response = await fetch(url, {
             method: 'GET'

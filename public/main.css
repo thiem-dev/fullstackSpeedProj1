@@ -1,1 +1,21 @@
+/* https://coolors.co/image-picker */
 
+@import url('https://fonts.googleapis.com/css?family=Noto Sans Old North Arabian:700|Noto Sans Old North Arabian:400');
+
+:root{
+    --text: #1e140b;
+    --background: #f5ede5;
+    --primary: #c8996a;
+    --secondary: #f0e3d6;
+    --accent: #b67d43;
+}
+
+/* sets all to defaults */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Noto Sans Old North Arabian';
+    font-weight: 400;
+    transition: .5s all ease;
+}

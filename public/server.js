@@ -10,7 +10,11 @@ const apiPort = process.env.API_PORT || 3000;
 const app = express();
 
 const pool = new Pool({
-    connectionString: process.env.DB_URL,
+    user: process.env.DB_USER,
+    host: process.env.DB_HOST,
+    database: "fullstackproj",
+    password: process.env.DB_PW,
+    port: process.env.DB_PORT
 });
 
 // ------------------------------------------------------- MIDDLEWARE
@@ -25,7 +29,7 @@ app.use(express.static('public'))
 app.get('/api/person', async (req, res) => {
     try{
         const result = await pool.query(
-            `SELECT * FROM person`
+            `SELECT * FROM person;`
         )
         if(result.rows.length === 0){
             return res.status(400).send(`no rows in person`)
@@ -102,7 +106,7 @@ app.delete('/api/person/:id', async (req, res) => {
     try{
         const result = await pool.query(
             `DELETE FROM page WHERE id=$1
-            RETURNING *;`, [pageId]
+            RETURNING *;`, [id]
         )
         if(result.rows.length === 0){
             return res.status(400).send(`no rows in person`)
@@ -119,7 +123,7 @@ app.use('/', (req, res, next) => {
     next({message: "The path you are looking for does not exist", status: 400})
 })
 
-app.listen(apiPort, (req, res) => {
+app.use((err, req, res, next) => {
     res.status(err.status).json({error:err})
 })
 

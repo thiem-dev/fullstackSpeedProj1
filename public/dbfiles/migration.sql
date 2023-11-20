@@ -1,1 +1,1 @@
-SELECT * FROM users
+CREATE TABLE person 

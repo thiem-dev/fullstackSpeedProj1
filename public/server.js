@@ -3,7 +3,6 @@ const pg = require("pg");
 const cors = require('cors');
 const dotenv = require('dotenv');
 
-
 dotenv.config();
 
 const { Pool } = pg;
@@ -99,6 +98,7 @@ app.put('/api/person/:id', async (req, res) => {
 
 //delete person
 app.delete('/api/person/:id', async (req, res) => {
+    const { id } = req.params;
     try{
         const result = await pool.query(
             `DELETE FROM page WHERE id=$1
@@ -113,3 +113,18 @@ app.delete('/api/person/:id', async (req, res) => {
         res.status(400).json(error)
     }
 });
+
+//  ------------------------------------------------------------ CATCH ALL ROUTE
+app.use('/', (req, res, next) => {
+    next({message: "The path you are looking for does not exist", status: 400})
+})
+
+app.listen(apiPort, (req, res) => {
+    res.status(err.status).json({error:err})
+})
+
+//  ------------------------------------------------------------ SERVER LISTENER
+
+app.listen(apiPort, () => {
+    console.log(`server listening on http://localhost:${apiPort}`)
+})
